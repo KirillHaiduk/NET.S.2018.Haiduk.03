@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Day3Task1
 {
@@ -14,7 +14,7 @@ namespace Day3Task1
         /// <param name="degree">Root of given degree</param>
         /// <param name="precision">Required precision for calculating</param>
         /// <returns>N-degree root of given number</returns>
-        public static double FindNthRoot(double number, double degree, double precision)
+        public static double FindNthRoot(double number, int degree, double precision)
         {
             if (precision > 1 || precision < 0)
             {
@@ -26,15 +26,15 @@ namespace Day3Task1
                 throw new ArgumentOutOfRangeException($"If number is negative, even {nameof(degree)} cannot be taken.");
             }
 
-            double x0 = number / degree;
+            double x0 = number;
             double x1 = (((degree - 1) * x0) + (number / Math.Pow(x0, degree - 1))) / degree;
-            while (Math.Abs(x1 - x0) >= precision / 1000000)
+            while (Math.Abs(x1 - x0) >= precision)
             {
                 x0 = x1;
-                x1 = (((degree - 1) * x0) + (number / Math.Pow(x0, degree - 1))) / degree;
+                x1 = (((degree - 1) * x0) + (number / Math.Pow(x0, degree - 1))) / degree;                
             }
-
-            return Math.Round(x1, precision.ToString().Length - 1);
+                        
+            return x1;
         }
     }
 }
